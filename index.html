@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+/* ================= FIRST PAGE ================= */
+.input-screen {
+    height: 100vh;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
+}
+
+.bg-icons {
+    position: absolute;
+    font-size: 60px;
+    opacity: 0.15;
+    animation: float 6s infinite alternate;
+}
+
+.icon1 { top: 10%; left: 10%; }
+.icon2 { top: 20%; right: 15%; }
+.icon3 { bottom: 15%; left: 20%; }
+.icon4 { bottom: 10%; right: 10%; }
+
+@keyframes float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-20px); }
+}
+
+.login-card {
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 35px;
+    width: 90%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,0,0,0.4);
+    animation: fadeZoom 1.5s ease;
+}
+
+@keyframes fadeZoom {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.login-card h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.login-card p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    background: linear-gradient(45deg, gold, orange);
+    cursor: pointer;
+}
+
+/* ================= WISH PAGE ================= */
+.wish-screen {
+    display: none;
+    height: 100vh;
+    background: url("fireworks.png") no-repeat center/cover;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.content {
+    position: relative;
+    top: 38%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.title {
+    font-size: clamp(32px, 7vw, 60px);
+    font-weight: 900;
+    background: linear-gradient(270deg,#ff4e50,#f9d423,#24c6dc,#abecd6,#ff4e50);
+    background-size: 1000% 1000%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 6s linear infinite;
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.name {
+    font-size: clamp(26px, 6vw, 46px);
+    margin-top: 20px;
+    color: #ffd700;
+    animation: bounce 2s infinite;
+    text-shadow: 0 0 20px gold;
+}
+
+@keyframes bounce {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+
+.wish-lines {
+    margin-top: 35px;
+    font-size: clamp(15px, 4vw, 20px);
+    line-height: 1.8;
+}
+
+.cracker {
+    position: absolute;
+    font-size: 32px;
+    animation: blast 2s infinite;
+}
+
+@keyframes blast {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+@keyframes sparkle {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- FIRST PAGE -->
+<div class="input-screen" id="inputScreen">
+
+    <div class="bg-icons icon1">🎆</div>
+    <div class="bg-icons icon2">🎇</div>
+    <div class="bg-icons icon3">✨</div>
+    <div class="bg-icons icon4">🎉</div>
+
+    <div class="login-card">
+        <h1>🎊 New Year Surprise 🎊</h1>
+        <p>Enter your name to see magic ✨</p>
+        <input type="text" id="name" placeholder="Your name">
+        <button onclick="openWish()">Celebrate 🎉</button>
+    </div>
+</div>
+
+<!-- WISH PAGE -->
+<div class="wish-screen" id="wishScreen">
+    <div class="content">
+        <div class="title">🎆 Happy New Year 2026 🎆</div>
+        <div class="name" id="nameText"></div>
+        <div class="wish-lines">
+            ✨ May joy follow you everywhere<br>
+            🌟 Success shine on you always<br>
+            💖 Health, peace & happiness<br>
+            🚀 A year full of achievements
+        </div>
+    </div>
+
+    <div class="cracker" style="top:20%; left:20%;">🎆</div>
+    <div class="cracker" style="top:60%; left:70%;">🎇</div>
+    <div class="cracker" style="top:80%; left:40%;">🎆</div>
+</div>
+
+<script>
+function openWish() {
+    let name = document.getElementById("name").value;
+    if(name === ""){
+        alert("Please enter your name");
+        return;
+    }
+
+    document.getElementById("inputScreen").style.display = "none";
+    document.getElementById("wishScreen").style.display = "block";
+    document.getElementById("nameText").innerText = name;
+    document.getElementById("bgMusic").play();
+}
+
+/* Sparkles */
+setInterval(() => {
+    let s = document.createElement("div");
+    s.innerText = "✨";
+    s.style.position = "absolute";
+    s.style.left = Math.random()*100 + "vw";
+    s.style.top = "100vh";
+    s.style.fontSize = "18px";
+    s.style.animation = "sparkle 3s linear";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),3000);
+},300);
+</script>
+
+</body>
+</html>
